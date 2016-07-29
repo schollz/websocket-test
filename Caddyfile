@@ -1,0 +1,14 @@
+127.0.0.1:80 {
+        gzip
+        proxy / 127.0.0.1:8080 {
+                except /static
+                proxy_header Host {host}
+		proxy_header X-Real-IP {remote}
+		proxy_header X-Forwarded-For {remote}
+		proxy_header X-Forwarded-Proto {scheme}
+		proxy_header  Connection {>Connection}
+                proxy_header  Upgrade    {>Upgrade}
+        }
+}
+
+
